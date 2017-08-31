@@ -1,0 +1,10 @@
+[package]
+name = "lista01"
+version = "0.1.0"
+authors = ["ogeniz"]
+
+[profile.release]
+lto = true
+
+[dependencies]
+text_io = "*"
