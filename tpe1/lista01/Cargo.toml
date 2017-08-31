@@ -1,10 +1,70 @@
 [package]
 name = "lista01"
 version = "0.1.0"
-authors = ["ogeniz"]
+authors = ["Ogeniz Façanha Costa <ogeniz@gmail.com>"]
+
+[profile.dev]
+# [opt-level] controls the '--opt-level' the compiler builds with.
+# 0-1 is good for debugging. 2 is well-optimized. Max is 3
+opt-level = 0
+# [debug] include debug information (debug symbols). Equivalent to
+# -C 'debuginfo=2' compiler flag.
+debug = true
+# [rpath] controls whether the compiler should set loader paths.
+# if true, passes '-C rpath' flag to the compiler
+rpath = false
+# [lto] Link Time Optimization usually reduces size of binaries and
+# static libraries. Increase compilation time.
+# if true, passes '-C lto' flag to the compiler
+lto = false
+# [debug-assertions] controls whether debug assertions are enabled
+# e.g debug_assertions!() and arithmetic overflow checks.
+debug-assertions = true
+# [codegen-units] if > 1 enables parallel code generation which improves
+# compile times, but prevents some optimizations.
+# passes '-C codegen-units'. Ignored when 'lto = true'.
+codegen-units = 1
+# [panic] panic strategy ('-C panic=...'), can also be abort.
+panic = 'unwind'
 
 [profile.release]
-lto = true
+opt-level = 3
+debug = false
+rpath = false
+lto = false
+debug-assertions = false
+codegen-units = 1
+panic = 'unwind'
+
+# The testing profile, used for `cargo test`.
+[profile.test]
+opt-level = 0
+debug = 2
+rpath = false
+lto = false
+debug-assertions = true
+codegen-units = 1
+panic = 'unwind'
+
+# The benchmarking profile, used for `cargo bench`.
+[profile.bench]
+opt-level = 3
+debug = false
+rpath = false
+lto = false
+debug-assertions = false
+codegen-units = 1
+panic = 'unwind'
+
+# The documentation profile, used for `cargo doc`.
+[profile.doc]
+opt-level = 0
+debug = 2
+rpath = false
+lto = false
+debug-assertions = true
+codegen-units = 1
+panic = 'unwind'
 
 [dependencies]
 text_io = "*"
